@@ -1,0 +1,85 @@
+<mvc:View controllerName="sync.ea.orderview.controller.Order"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"
+xmlns:f="sap.f"
+xmlns:l="sap.ui.layout"
+xmlns:micro="sap.suite.ui.microchart"
+displayBlock="true"
+height="100%">
+
+<Page showHeader="false">
+    <ScrollContainer width="100%" height="100%" vertical="true" horizontal="false" >
+        <l:VerticalLayout class="sapUiContentPadding verticalLayoutWithBackground" width="100%" height="100%">
+                        <l:content>
+                <!-- List -->
+                <List
+                    id="list"
+                    headerText="주문자" class="font-face4 HeaderText rounded-list"
+                    busyIndicatorDelay="0"
+                    items="{path:'/OrderHistorySet',
+                            length: 1
+                        }">
+                    <items>
+                        <ObjectListItem title="{Custname}" icon="sap-icon://add-product" class="font-face3 HeaderText2">
+                            <attributes>
+                                <ObjectAttribute title="연락처"    text="{Telno}"/>
+                            </attributes>
+                        </ObjectListItem>
+                    </items>
+                </List>
+
+                <!-- Scroll Container for the Table -->
+                <!-- <ScrollContainer width="100%" height="400px" vertical="true" horizontal="false"> -->
+                    <!-- Responsive Table -->
+                    <Table id="responsiveTable" inset="false" items="{/OrderHistorySet}" growing="true" growingScrollToLoad="true" growingThreshold="10">
+                        <columns>
+                            <Column width="7%">
+                                <Text text="예약번호" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="15%">
+                                <Text text="방문예정일자" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="15%">
+                                <Text text="픽업여부" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="15%">
+                                <Text text="제품명" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="10%">
+                                <Text text="주문수량" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="10%">
+                                <Text text="금액" class="font-face2" textAlign="Center"/>
+                            </Column>
+                            <Column width="15%">
+                                <Text text="상태" class="font-face2" textAlign="Center"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem>
+                                <cells>
+                                    <Text text="{Bookid}" class="font-face2" textAlign="Center"/>
+                                    <ObjectStatus text="{Visitdat} / {path: 'Visitdat', formatter: '._getDateDifference'}일 남음"
+                                                  state="{path: 'Visitdat', formatter: '._getStatusState'}" textAlign="Center"/>
+                                    <ObjectStatus text="{= ${Visitdat} > ${iDifferenceInDays} ? '픽업완료' : '픽업 대기'}"
+                                                  icon="{= ${Visitdat} > ${iDifferenceInDays} ? 'sap-icon://message-success' : 'sap-icon://pending' }"
+                                                  state="{= ${Visitdat} > ${iDifferenceInDays} ? 'Success' : 'Warning' }"
+                                                  textAlign="Center"/>
+                                    <Text text="프로터보™" class="font-face2" textAlign="Center"/>
+                                    <ObjectNumber number="{Auqua}" unit="{Meins}" class="font-face2" textAlign="Center"/>
+                                    <ObjectNumber number="{Netpr}" unit="{Waers}" class="font-face2" textAlign="Center"/>
+                                    <ObjectStatus text="{= ${Status} === 'X' ? '예약중' : '현장구매' }"
+                                                  icon="{= ${Status} === 'X' ? 'sap-icon://lateness' : 'sap-icon://credit-card' }"
+                                                  state="{= ${Status} === 'X' ? 'Success' : 'Information' }"
+                                                  inverted="true" textAlign="Center"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                    
+                <!-- </ScrollContainer> -->
+            </l:content>
+        </l:VerticalLayout>
+    </ScrollContainer>
+</Page>
+</mvc:View>
