@@ -1,4 +1,4 @@
-# Dynamic_Orderview
+# Dynamic_Orderview [![Youtube](https://img.shields.io/badge/Youtube-ff0000?style=flat&logo=youtube)](https://youtu.be/2njm-gRvg5k?si=_cRmEfF53j4y4sk9)
 동적으로 주문 내역을 확인하기 위한 프로그램
 
 
